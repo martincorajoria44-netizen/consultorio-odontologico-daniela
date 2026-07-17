@@ -127,6 +127,11 @@ nav.solid{background:rgba(252,251,248,.92);backdrop-filter:blur(12px);box-shadow
 .hero-card-row:last-child{margin-bottom:0}
 .hero-card-row span:first-child{font-size:.68rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray)}
 .hero-card-row span:last-child{font-size:1rem;font-weight:600;color:var(--ink)}
+.hero-card-consulta{gap:.55rem}
+.hero-card-consulta-desc{font-size:.9rem;font-weight:400!important;text-transform:none!important;letter-spacing:0!important;color:var(--ink)!important}
+.hero-card-consulta-price{font-size:.9rem;font-weight:400!important;text-transform:none!important;letter-spacing:0!important;color:var(--ink)!important}
+.hero-card-consulta-price strong{font-weight:600;color:var(--teal-deep)}
+.hero-card-consulta-note{font-size:.8rem!important;font-weight:400!important;text-transform:none!important;letter-spacing:0!important;color:var(--gray)!important;line-height:1.6}
 
 /* BOTONES editoriales — semibold, mayúsculas, tracking sutil */
 .btn-solid{position:relative;overflow:hidden;background:var(--teal);color:var(--white);padding:1rem 2.4rem;border-radius:var(--radius-sm);text-decoration:none;font-size:.8rem;font-weight:600;letter-spacing:var(--tr-button);text-transform:uppercase;display:inline-block;transition:letter-spacing .22s ease,background .22s ease,box-shadow .22s ease,transform .22s ease}
@@ -369,7 +374,12 @@ footer{background:linear-gradient(180deg,var(--wash-2) 0%,var(--cream) 100%);pad
       <div class="hero-card reveal">
         <div class="hero-card-label">Datos del consultorio</div>
         <div class="hero-card-row"><span>Profesional</span><span>Dra. Daniela Meneses</span></div>
-        <div class="hero-card-row"><span>Consulta inicial</span><span>$500</span></div>
+        <div class="hero-card-row hero-card-consulta">
+          <span>Primera consulta</span>
+          <span class="hero-card-consulta-desc">Evaluación profesional y diagnóstico.</span>
+          <span class="hero-card-consulta-price">Valor de la consulta: <strong>$500</strong></span>
+          <span class="hero-card-consulta-note">Si iniciás tu tratamiento con nosotros, ese importe se descuenta del presupuesto final.</span>
+        </div>
         <div class="hero-card-row"><span>Dirección</span><span>Gral. Urquiza 3030</span></div>
         <div class="hero-card-row"><span>Turnos</span><span>Por WhatsApp</span></div>
       </div>
