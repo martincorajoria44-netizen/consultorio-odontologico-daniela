@@ -199,10 +199,8 @@ nav.solid{background:rgba(252,251,248,.92);backdrop-filter:blur(12px);box-shadow
 /* LA PROFESIONAL — pieza central del sitio */
 .pro-section{position:relative}
 .pro-inner{display:grid;grid-template-columns:.85fr 1.15fr;gap:4.5rem;align-items:center;position:relative}
-.pro-photo-slot{aspect-ratio:3/4;border-radius:var(--radius);box-shadow:var(--shadow-soft);background:linear-gradient(155deg,var(--wash) 0%,var(--teal-support) 65%,var(--wash) 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.25rem}
-.pro-photo-slot::before{content:'';position:absolute;inset:18px;border:1px solid rgba(5,148,139,.28)}
-.pro-monogram{font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:500;font-size:7.5rem;line-height:1;color:var(--teal-deep);opacity:.4}
-.pro-photo-slot-mark{font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-deep);opacity:.55}
+.pro-photo-slot{aspect-ratio:4/3;border-radius:var(--radius);box-shadow:var(--shadow-soft);overflow:hidden;position:relative}
+.pro-photo-slot img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:saturate(.96) contrast(1.02)}
 .pro-quote{font-family:var(--font-display);font-variation-settings:'opsz' 60;font-size:clamp(1.5rem,2.6vw,2.25rem);font-weight:500;letter-spacing:var(--tr-title);color:var(--ink);line-height:var(--lh-quote);margin-bottom:2rem}
 .pro-quote em{color:var(--teal)}
 .pro-name{font-size:var(--fs-eyebrow);font-weight:600;letter-spacing:var(--tr-eyebrow);text-transform:uppercase;color:var(--teal-deep);margin-bottom:2.25rem}
@@ -515,9 +513,7 @@ footer{background:linear-gradient(180deg,var(--wash-2) 0%,var(--cream) 100%);pad
   <div class="wrap pro-inner">
     <div class="reveal">
       <div class="pro-photo-slot">
-        <!-- Reemplazar todo este bloque por <img src="foto-real-daniela.jpg"> cuando la clienta entregue fotografía profesional -->
-        <span class="pro-monogram">D</span>
-        <span class="pro-photo-slot-mark">Fotografía próximamente</span>
+        <img src="img/consultorio.jpg" width="1000" height="800" loading="lazy" alt="Interior del consultorio odontológico">
       </div>
     </div>
     <div class="reveal">
@@ -729,6 +725,8 @@ var HORARIOS={
   'Sábado': rango('09:00','21:00')
 };
 var DIAS=['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+var DIA_ETIQUETA={'Jueves':' · Cirugías'};
+var DIA_MENSAJE={'Jueves':'Los jueves los reservamos para cirugías. Escribinos por WhatsApp y coordinamos tu turno.'};
 var diaActivo=DIAS.find(function(d){return HORARIOS[d] && HORARIOS[d].length});
 
 var tabsEl=document.getElementById('dayTabs'),slotsEl=document.getElementById('slotsGrid');
@@ -739,7 +737,7 @@ function renderTabs(){
     var cerrado=!HORARIOS[d]||!HORARIOS[d].length;
     var b=document.createElement('button');
     b.className='day-tab'+(d===diaActivo?' active':'')+(cerrado?' closed':'');
-    b.textContent=d+(cerrado?' · Cerrado':'');
+    b.textContent=d+(cerrado?(DIA_ETIQUETA[d]||' · Cerrado'):'');
     b.addEventListener('click',function(){diaActivo=d;renderTabs();renderSlots()});
     tabsEl.appendChild(b);
   });
@@ -749,7 +747,8 @@ function renderSlots(){
   slotsEl.innerHTML='';
   var horas=HORARIOS[diaActivo];
   if(!horas||!horas.length){
-    slotsEl.innerHTML='<p class="no-attention">Sin atención este día.</p>';
+    var msg=DIA_MENSAJE[diaActivo]||'Sin atención este día.';
+    slotsEl.innerHTML='<p class="no-attention">'+msg+'</p>';
     return;
   }
   horas.forEach(function(h){
